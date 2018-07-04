@@ -47,11 +47,33 @@ class SubViewController: UIViewController {
         self.createButtons()
         
         //first 默认加载
+        self.view.addSubview(fourthViewController.view)
+        self.view.addSubview(thirdViewController.view)
+        self.view.addSubview(secondViewController.view)
         self.view.addSubview(firstViewController.view)
         
         self.view.addSubview(self.bottomLine)
+        
+        self.createBackBtn()
     }
 
+    //MARK: - 私有方法
+    
+    //返回按钮
+    func createBackBtn() {
+        let btn = UIButton(type: .custom)
+        btn.frame = CGRect(x: 0, y: 100, width: ScreenWidth, height: 30)
+        btn.setTitle("返回", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.addTarget(self, action: #selector(back), for: .touchUpInside)
+        self.view.addSubview(btn)
+    }
+    
+    @objc func back() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    //按钮集
     func createButtons() {
         
         let btnNameArray = ["button1", "button2", "button3", "button4"]
@@ -107,6 +129,7 @@ class SubViewController: UIViewController {
         }
     }
     
+    //删除控制器
     func removeViewCotrollers(_ tag:Int) {
         
         switch tag {
